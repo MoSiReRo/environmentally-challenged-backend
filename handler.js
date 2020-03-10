@@ -35,31 +35,30 @@ app.get("/challenge", function(req, res) {
   });
 });
 
-// // PUT / UPDATING - marking challenge as done
-// app.put("/challenge/:challengeId", function(req, res) {
+// PUT / UPDATING - marking challenge - I did it!
+app.put("/challenge/:challengeId", function(req, res) {
 
-//   const challengeToUpdate = req.body.challengeId;
+  const challengeToUpdate = req.body.challengeId;
 
-//   connection.query("UPDATE `challenge` SET `completed` = true WHERE `challengeId` = ?", challengeToUpdate, function(
-//     error,
-//     results,
-//     fields
-//   ) {
-//     if (error) {
-//       console.error(
-//         "Your query had a problem with marking a challenge as completed",
-//         error
-//       );
-//       res.status(500).json({ errorMessage: error });
-//     } else {
-
-//       res.json({
-//         message: "Your challenge has been marked as completed",
-//         challenge: challengeToUpdate
-//       });
-//     }
-//   });
-// });
+  connection.query("UPDATE `challenge` SET `completed` = true WHERE `challengeId` = ?", challengeToUpdate, function(
+    error,
+    results,
+    fields
+  ) {
+    if (error) {
+      console.error(
+        "Your query had a problem with marking a challenge as completed",
+        error
+      );
+      res.status(500).json({ errorMessage: error });
+    } else {
+      res.json({
+        message: "Your challenge has been marked as completed",
+        challenge: challengeToUpdate
+      });
+    }
+  });
+});
 
 // POST / CREATING challenges - internal use only i.e. we can add challenges to database using this in Postman, but we aren't giving this option to users of the App
 app.post("/challenge", function(req, res) {
