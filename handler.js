@@ -61,29 +61,29 @@ app.get("/challenge", function(req, res) {
 //   });
 // });
 
-// // POST / CREATING challenges - internal use only
-// app.post("/challenge", function(req, res) {
-//   const challengeToInsert = req.body;
-//   challengeToInsert.challengeId = uuidv4();
+// POST / CREATING challenges - internal use only i.e. we can add challenges to database using this in Postman, but we aren't giving this option to users of the App
+app.post("/challenge", function(req, res) {
+  const challengeToInsert = req.body;
+  challengeToInsert.challengeId = uuidv4();
 
-//   connection.query("INSERT INTO `challenge` SET ?", challengeToInsert, function(
-//     error,
-//     results,
-//     fields
-//   ) {
-//     if (error) {
-//       console.error(
-//         "Your query had a problem with inserting a new challenge",
-//         error
-//       );
-//       res.status(500).json({ errorMessage: error });
-//     } else {
-//       res.json({
-//         challenge: challengeToInsert
-//       });
-//     }
-//   });
-// });
+  connection.query("INSERT INTO `challenge` SET ?", challengeToInsert, function(
+    error,
+    results,
+    fields
+  ) {
+    if (error) {
+      console.error(
+        "Your query had a problem with inserting a new challenge",
+        error
+      );
+      res.status(500).json({ errorMessage: error });
+    } else {
+      res.json({
+        challenge: challengeToInsert
+      });
+    }
+  });
+});
 
 // // DELETE challenge either when completed or when discarded
 // app.delete("/challenge/:challengeId", function(req, res) {
