@@ -85,32 +85,32 @@ app.post("/challenge", function(req, res) {
   });
 });
 
-// // DELETE challenge either when completed or when discarded
-// app.delete("/challenge/:challengeId", function(req, res) {
+// DELETE challenge either when completed or when user clicks on 'choose another'
+app.delete("/challenge/:challengeId", function(req, res) {
 
-//   const challengeId = req.params.challengeId;
+  const challengeId = req.body.challengeId;
 
-//   connection.query("DELETE FROM `challenge` WHERE `challengeId` = ?", challengeId, function(
-//     error,
-//     results,
-//     fields
-//   ) {
-//     if (error) {
-//       console.error(
-//         "Your query had a problem with deleting the challenge",
-//         error
-//       );
-//       res.status(500).json({ errorMessage: error });
-//     } else {
+  connection.query("DELETE FROM `challenge` WHERE `challengeId` = ?", challengeId, function(
+    error,
+    results,
+    fields
+  ) {
+    if (error) {
+      console.error(
+        "Your query had a problem with deleting the challenge",
+        error
+      );
+      res.status(500).json({ errorMessage: error });
+    } else {
       
-//       res.json({
-//         message : "Challenge deleted",
-//         challenge : results
-//       });
-//     }
-//   });
+      res.json({
+        message : "Challenge deleted",
+        challenge : results
+      });
+    }
+  });
 
-// });
+});
 
 
 
