@@ -30,3 +30,7 @@ functions:
           path: challenge/{challengeId}
           method: delete
           cors: true
+      - http:
+          path: challenge/{challengeId}
+          method: patch
+          cors: true

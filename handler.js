@@ -60,6 +60,31 @@ app.put("/challenge/:challengeId", function(req, res) {
   });
 });
 
+// PATCH / UPDATING - marking challenge - accepted
+app.patch("/challenge/:challengeId", function(req, res) {
+
+  const challengeToUpdateAccepted = req.body.challengeId;
+
+  connection.query("UPDATE `challenge` SET `accepted` = true WHERE `challengeId` = ?", challengeToUpdateAccepted, function(
+    error,
+    results,
+    fields
+  ) {
+    if (error) {
+      console.error(
+        "Your query had a problem with marking a challenge as accepted",
+        error
+      );
+      res.status(500).json({ errorMessage: error });
+    } else {
+      res.json({
+        message: "Your challenge has been marked as accepted",
+        challenge: challengeToUpdateAccepted
+      });
+    }
+  });
+});
+
 // POST / CREATING challenges - internal use only i.e. we can add challenges to database using this in Postman, but we aren't giving this option to users of the App
 app.post("/challenge", function(req, res) {
   const challengeToInsert = req.body;
