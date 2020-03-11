@@ -38,7 +38,7 @@ app.get("/challenge", function(req, res) {
 // PUT / UPDATING - marking challenge - I did it!
 app.put("/challenge/:challengeId", function(req, res) {
 
-  const challengeToUpdate = req.body.challengeId;
+  const challengeToUpdate = req.params.challengeId;
 
   connection.query("UPDATE `challenge` SET `completed` = true WHERE `challengeId` = ?", challengeToUpdate, function(
     error,
@@ -63,7 +63,7 @@ app.put("/challenge/:challengeId", function(req, res) {
 // PATCH / UPDATING - marking challenge - accepted
 app.patch("/challenge/:challengeId", function(req, res) {
 
-  const challengeToUpdateAccepted = req.body.challengeId;
+  const challengeToUpdateAccepted = req.params.challengeId;
 
   connection.query("UPDATE `challenge` SET `accepted` = true WHERE `challengeId` = ?", challengeToUpdateAccepted, function(
     error,
@@ -112,7 +112,7 @@ app.post("/challenge", function(req, res) {
 // DELETE challenge either when completed or when user clicks on 'choose another'
 app.delete("/challenge/:challengeId", function(req, res) {
 
-  const challengeId = req.body.challengeId;
+  const challengeId = req.params.challengeId;
 
   connection.query("DELETE FROM `challenge` WHERE `challengeId` = ?", challengeId, function(
     error,
