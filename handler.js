@@ -38,13 +38,13 @@ app.get("/challenge", function(req, res) {
 // PUT / UPDATING - marking challenge - I did it!
 app.put("/challenge/:challengeId", function(req, res) {
   // Accept from client which taskId is being updated
-  let challengeToUpdate = req.params.challengeId;
+  const challengeToUpdate = req.params.challengeId;
 
   // Set SQL statement as variable
-  const sqlUpdate = "UPDATE `challenge` SET `completed` = true, `accepted` = ? WHERE `challengeId` = ?";
+  const sqlUpdate = "UPDATE `challenge` SET `completed` = ?, `accepted` = ? WHERE `challengeId` = ?";
 
   connection.query(
-    sqlUpdate, [req.body.accepted, challengeToUpdate], function(
+    sqlUpdate, [req.body.completed, req.body.accepted, challengeToUpdate], function(
     error,
     results,
     fields
