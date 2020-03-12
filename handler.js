@@ -40,7 +40,10 @@ app.put("/challenge/:challengeId", function(req, res) {
 
   const challengeToUpdate = req.params.challengeId;
 
-  connection.query("UPDATE `challenge` SET `completed` = true WHERE `challengeId` = ?", challengeToUpdate, function(
+  const sqlUpdate = "UPDATE `challenge` SET `completed` = true, `accepted` = ? WHERE `challengeId` = ?";
+
+  connection.query(
+    sqlUpdate, [req.body.completed, req.body.accepted, challengeToUpdate], function(
     error,
     results,
     fields
