@@ -35,6 +35,23 @@ app.get("/challenge", function(req, res) {
   });
 });
 
+app.get("/accepted-challenge", function(req, res) {
+  connection.query('SELECT * FROM `challenge` WHERE `userId` = "1" AND `completed` = "0" AND `accepted` = "1"', function(
+    error,
+    results,
+    fields
+  ) {
+    // error will be an Error if one occurred during the query
+    if (error) {
+      console.error("Your query had a problem with fetching the accepted challenge", error);
+      res.status(500).json({ errorMessage: error });
+    } else {
+      // query was successful
+      res.json({ challenge: results });
+    }
+  });
+});
+
 // PUT / UPDATING - marking challenge - I did it!
 app.put("/challenge/:challengeId", function(req, res) {
   // Accept from client which taskId is being updated
@@ -64,6 +81,7 @@ app.put("/challenge/:challengeId", function(req, res) {
   });
 });
 
+/*
 // PATCH / UPDATING - marking challenge - accepted
 app.patch("/challenge/:challengeId", function(req, res) {
 
@@ -88,6 +106,7 @@ app.patch("/challenge/:challengeId", function(req, res) {
     }
   });
 });
+*/
 
 // POST / CREATING challenges - internal use only i.e. we can add challenges to database using this in Postman, but we aren't giving this option to users of the App
 app.post("/challenge", function(req, res) {

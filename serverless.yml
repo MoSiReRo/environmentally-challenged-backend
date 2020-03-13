@@ -31,6 +31,6 @@ functions:
           method: delete
           cors: true
       - http:
-          path: challenge/{challengeId}
-          method: patch
+          path: accepted-challenge
+          method: get
           cors: true
